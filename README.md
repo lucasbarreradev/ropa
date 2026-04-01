@@ -52,11 +52,11 @@ http://localhost:8081/
 El sistema utiliza SQL Server corriendo en contenedor Docker.
 
 ## 📌 Estructura del proyecto
-/controller → Controladores
-/service → Lógica de negocio
-/repository → Acceso a datos
-/model → Entidades
-/WEB-INF/jsp → Vistas JSP
+- /controller → Controladores
+- /service → Lógica de negocio
+- /repository → Acceso a datos
+- /model → Entidades
+- /WEB-INF/jsp → Vistas JSP
 
 ## ⚠️ Notas
 Asegurarse de que los puertos no estén en uso
