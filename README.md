@@ -3,12 +3,15 @@
 ## 📑 Descripción
 Aplicación web desarrollada con Spring Boot y JSP para la gestión de productos de indumentaria.
 
-Permite administrar productos, talles, stock y proveedores mediante una arquitectura en capas y desplegada en contenedores Docker.
+Permite administrar productos, talles, stock, crear etiquetas y proveedores mediante una arquitectura en capas y desplegada en contenedores Docker.
 
 ## ⚙️ Funcionalidades
 - 👕 Gestión de productos
 - 📏 Manejo de talles
 - 📦 Control de stock por producto y talle
+- 🧾 Creación de ventas y presupuestos
+- 💰 Control de ganancias
+- 🏷️ Impresiones de etiquetas para cada producto
 - 🏷 Asociación con proveedores
 - 🔍 Búsqueda y filtrado de productos
 
