@@ -48,21 +48,20 @@ docker-compose up -d
 http://localhost:8081/
 ```
 
-🗄 Base de datos
-
+## 🗄 Base de datos
 El sistema utiliza SQL Server corriendo en contenedor Docker.
 
-📌 Estructura del proyecto
+## 📌 Estructura del proyecto
 /controller → Controladores
 /service → Lógica de negocio
 /repository → Acceso a datos
 /model → Entidades
 /WEB-INF/jsp → Vistas JSP
 
-⚠️ Notas
+## ⚠️ Notas
 Asegurarse de que los puertos no estén en uso
 Verificar variables de entorno en docker-compose.yml
 
-✒️ Autor
+## ✒️ Autor
 Lucas Barrera
 * [LinkedIn](https://www.linkedin.com/in/lucas-barrera-dev)
