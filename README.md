@@ -1,21 +1,68 @@
-# Sistema de gestión de stock en Spring Boot
+# Sistema de Gestión de Ropa
 
-## Descripción 📑
-Sistema de control de stock para una tienda de ropa hecha con Spring y JSP.
+## 📑 Descripción
+Aplicación web desarrollada con Spring Boot y JSP para la gestión de productos de indumentaria.
 
-## Tecnologías 🛠
-<!-- Iconos sacados de: https://github.com/hendrasob/badges/blob/master/README.md y https://github.com/alexandresanlim/Badges4-README.md-Profile -->
-![SPRING](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
-![SPRING BOOT](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)
-![SPRING SECURITY](https://img.shields.io/badge/Spring_Security-6DB33F?style=for-the-badge&logo=Spring-Security&logoColor=white)
-![HIBERNATE](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
-![MYSQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
-![BOOTSTRAP](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+Permite administrar productos, talles, stock y proveedores mediante una arquitectura en capas y desplegada en contenedores Docker.
 
-## Autor ✒️
-**Lucas Barrera**
+## ⚙️ Funcionalidades
+- 👕 Gestión de productos
+- 📏 Manejo de talles
+- 📦 Control de stock por producto y talle
+- 🏷 Asociación con proveedores
+- 🔍 Búsqueda y filtrado de productos
 
+## 🏗 Arquitectura
+- **Controller** → Manejo de requests HTTP
+- **Service** → Lógica de negocio
+- **Repository** → Persistencia (Spring Data JPA)
+- **View** → JSP + JSTL
+
+## 🛠 Tecnologías
+- Java 17
+- Spring Boot
+- Spring MVC
+- Spring Data JPA
+- JSP + JSTL
+- SQL Server
+- Docker
+- Docker Compose
+
+## 📦 Requisitos
+- Docker
+- Docker Compose
+
+## 🚀 Ejecución con Docker
+
+1. Clonar el repositorio
+```bash
+git clone <tu-repo>
+cd <tu-carpeta>
+```
+2. Levantar el sistema
+```bash
+docker-compose up -d
+```
+3. Acceder a la aplicación
+```bash
+http://localhost:8081/
+```
+
+🗄 Base de datos
+
+El sistema utiliza SQL Server corriendo en contenedor Docker.
+
+📌 Estructura del proyecto
+/controller → Controladores
+/service → Lógica de negocio
+/repository → Acceso a datos
+/model → Entidades
+/WEB-INF/jsp → Vistas JSP
+
+⚠️ Notas
+Asegurarse de que los puertos no estén en uso
+Verificar variables de entorno en docker-compose.yml
+
+✒️ Autor
+Lucas Barrera
 * [LinkedIn](https://www.linkedin.com/in/lucas-barrera-dev)
-
-## Instalación 
-Este proyecto no necesita de instalación.
