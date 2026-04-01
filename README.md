@@ -11,7 +11,7 @@ Permite administrar productos, talles, stock, crear etiquetas y proveedores medi
 - 📦 Control de stock por producto y talle
 - 🧾 Creación de ventas y presupuestos
 - 💰 Control de ganancias
-- 🏷️ Impresiones de etiquetas para cada producto
+- 🖨️ Impresiones de etiquetas para cada producto
 - 🏷 Asociación con proveedores
 - 🔍 Búsqueda y filtrado de productos
 
