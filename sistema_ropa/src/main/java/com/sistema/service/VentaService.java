@@ -88,7 +88,11 @@ public class VentaService {
 
             // Snapshot del precio actual
             item.setPrecioUnitario(precio);
-            item.setCostoUnitario(productoTalle.getPrecioCompra());
+            item.setCostoUnitario(
+                    productoTalle.getPrecioCompra() != null
+                            ? productoTalle.getPrecioCompra()
+                            : BigDecimal.ZERO
+            );
             item.setAlicuotaIva(productoTalle.getProducto().getTipoIva().getPorcentaje());
 
             // Calcular subtotal
@@ -160,7 +164,11 @@ public class VentaService {
             item.setPrecioUnitario(precio);
             item.setProductoTalle(productoTalle);
             item.setCantidad(dp.getCantidad());
-            item.setCostoUnitario(productoTalle.getPrecioCompra());
+            item.setCostoUnitario(
+                    productoTalle.getPrecioCompra() != null
+                            ? productoTalle.getPrecioCompra()
+                            : BigDecimal.ZERO
+            );
             item.setDescuentoPct(dp.getDescuentoPct());
             item.setAlicuotaIva(productoTalle.getProducto().getTipoIva().getPorcentaje());
             item.calcularSubtotal();

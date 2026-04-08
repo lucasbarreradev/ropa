@@ -28,8 +28,13 @@ services:
       MYSQL_ROOT_PASSWORD: root123
       MYSQL_PASSWORD: app123
       MYSQL_DATABASE: ropa
+    volumes:
+      - mysql_data:/var/lib/mysql  
     restart: always
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 10s
       retries: 10
+      
+volumes:
+  mysql_data:      
