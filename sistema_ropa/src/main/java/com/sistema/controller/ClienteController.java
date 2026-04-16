@@ -40,7 +40,7 @@ public class ClienteController {
         model.addAttribute("clientes",
                 clienteService.getClientes());
 
-        model.addAttribute("origen", origen); // 👈 clave
+        model.addAttribute("origen", origen);
         return "cliente/listar";
     }
 
@@ -143,11 +143,6 @@ public class ClienteController {
             if (cliente.getApellido() == null || cliente.getApellido().trim().isEmpty()) {
                 return ResponseEntity.badRequest()
                         .body(Map.of("error", "El apellido es obligatorio"));
-            }
-
-            if (cliente.getDni() == null || cliente.getDni().trim().isEmpty()) {
-                return ResponseEntity.badRequest()
-                        .body(Map.of("error", "El DNI es obligatorio"));
             }
 
             // Verificar si el DNI ya existe

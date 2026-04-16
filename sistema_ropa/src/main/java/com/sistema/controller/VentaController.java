@@ -128,8 +128,7 @@ public class VentaController {
             );
 
             ra.addFlashAttribute("mensaje", "Venta realizada correctamente");
-            // Redirigir a vista del ticket
-            return "redirect:/ventas/ticket/" + venta.getId();
+            return "redirect:/ventas?ticketId=" + venta.getId();
 
         } catch (Exception e) {
             ra.addFlashAttribute("error", e.getMessage());

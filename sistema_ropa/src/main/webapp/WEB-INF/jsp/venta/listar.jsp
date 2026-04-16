@@ -116,5 +116,24 @@
                 </footer>
     </div>
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const params = new URLSearchParams(window.location.search);
+    const ticketId = params.get('ticketId');
+
+    if (ticketId) {
+
+        const url = '${pageContext.request.contextPath}/ventas/ticket/' + ticketId;
+
+        const win = window.open(url, '_blank');
+
+        if (!win) {
+            window.location.href = url;
+        }
+    }
+
+});
+</script>
 
 
