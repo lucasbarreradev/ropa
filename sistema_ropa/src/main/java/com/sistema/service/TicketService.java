@@ -16,7 +16,7 @@ public class TicketService {
 
     private static final DecimalFormat DF = new DecimalFormat("#,##0.00");
     private static final DateTimeFormatter DATE_FMT =
-            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private Image generarCodigoBarras(PdfWriter writer, String codigo) throws Exception {
 

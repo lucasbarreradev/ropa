@@ -35,7 +35,7 @@
         }
 
         .etiqueta {
-            width: 70mm;
+            width: 80mm;
             height: 40mm;
             border: 1px dashed #999;
             padding: 3mm;
@@ -53,6 +53,10 @@
                 border: 1px solid #000;
             }
         }
+        @page {
+            size: A4;
+            margin: 10mm;
+        }
 
         .etiqueta h5 {
             font-size: 14px;
@@ -68,8 +72,8 @@
         }
 
         .etiqueta img {
-            max-width: 100%;
-            height: 20mm;
+            width: 100%;
+            height: 22mm;
             object-fit: contain;
         }
 
@@ -94,7 +98,7 @@
                 ← Volver
             </a>
             <span class="ms-3 text-muted">
-                Tamaño: 70mm x 40mm | Total: ${tallesProducto.size()} etiquetas
+                Tamaño: 80mm x 40mm | Total: ${tallesProducto.size()} etiquetas
             </span>
         </div>
     </div>
