@@ -5,6 +5,9 @@ Aplicación web desarrollada con Spring Boot y JSP para la gestión de productos
 
 Permite administrar productos, talles, stock, crear etiquetas y proveedores mediante una arquitectura en capas y desplegada en contenedores Docker.
 
+## 🚀 Demo
+👉 https://youtu.be/Svwl28HUqQM
+
 ## ⚙️ Funcionalidades
 - 👕 Gestión de productos
 - 📏 Manejo de talles
