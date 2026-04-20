@@ -39,16 +39,16 @@ Permite administrar productos, talles, stock, crear etiquetas y proveedores medi
 
 1. Clonar el repositorio
 ```bash
-git clone <tu-repo>
-cd <tu-carpeta>
+git clone https://github.com/lucasbarreradev/ropa
+cd proyecto_ropa
 ```
 2. Levantar el sistema
 ```bash
-docker-compose up -d
+ADMIN_PASS=1234 EMPLEADO_PASS=12345 docker-compose up --build -d
 ```
 3. Acceder a la aplicación
 ```bash
-http://localhost:8081/
+http://localhost:8081/ropa
 ```
 
 ## 🗄 Base de datos
