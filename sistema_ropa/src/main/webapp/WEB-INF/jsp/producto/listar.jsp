@@ -92,6 +92,11 @@
                                                    title="Gestionar talles">
                                                     📏 Talles
                                                 </a>
+                                                                                            <a class="btn btn-sm btn-warning"
+                                                                                               href="${pageContext.request.contextPath}/productos/editar/${p.id}"
+                                                                                               title="Editar producto">
+                                                                                                ✏️ Editar
+                                                                                            </a>
                                                 <form method="POST"
                                                       action="${pageContext.request.contextPath}/productos/eliminar/${p.id}"
                                                       style="display:inline">

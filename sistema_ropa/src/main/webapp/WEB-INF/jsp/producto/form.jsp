@@ -20,10 +20,20 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST"
-                              action="${pageContext.request.contextPath}/productos/guardar">
+                        <!-- Acción del form -->
+                                                <c:choose>
+                                                    <c:when test="${producto.id != null}">
+                                                        <c:url var="formAction" value="/productos/actualizar/${producto.id}"/>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <c:url var="formAction" value="/productos/guardar"/>
+                                                    </c:otherwise>
+                                                </c:choose>
 
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                                <form method="post" action="${formAction}">
+                                                <input type="hidden"
+                                                           name="${_csrf.parameterName}"
+                                                           value="${_csrf.token}"/>
 
                             <div class="mb-3">
                                 <label class="form-label">Descripción *</label>
@@ -45,7 +55,7 @@
                                                                                                                    value="${producto.proveedor.nombreRazonSocial}"
                                                                                                                    readonly>
 
-                                                                                                            <input type="hidden" name="proveedorId"
+                                                                                                            <input type="hidden" name="proveedor.id"
                                                                                                                    value="${producto.proveedor.id}">
 
                                                                                                             <a href="${pageContext.request.contextPath}/proveedores?origen=producto&productoId=${producto.id}"

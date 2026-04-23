@@ -269,6 +269,49 @@ public class ProductoController {
     }
 
     // ==========================================
+    // FORM EDITAR producto
+    // ==========================================
+    @GetMapping("/editar/{id}")
+    public String editar(@PathVariable Long id,
+                         @RequestParam(required = false) Long proveedorId,
+                         Model model,
+                         RedirectAttributes ra) {
+
+        Producto producto = productoService.getProductoById(id).orElse(null);
+
+        if (producto == null) {
+            ra.addFlashAttribute("error", "Producto no encontrado");
+            return "redirect:/productos";
+        }
+
+        if (proveedorId != null) {
+            proveedorService.getProveedorById(proveedorId)
+                    .ifPresent(producto::setProveedor);
+        }
+
+        model.addAttribute("producto", producto);
+        model.addAttribute("tiposIva", TipoIva.values());
+        return "producto/form";
+    }
+
+
+    // ==========================================
+    // ACTUALIZAR productos
+    // ==========================================
+    @PostMapping("/actualizar/{id}")
+    public String actualizar(@PathVariable Long id,
+                             @ModelAttribute Producto producto,
+                             RedirectAttributes ra) {
+
+
+        productoService.updateProducto(id, producto);
+        ra.addFlashAttribute("mensaje",
+                "Producto actualizado correctamente");
+
+        return "redirect:/productos";
+    }
+
+    // ==========================================
     // BUSCAR (para autocomplete)
     // ==========================================
     @GetMapping("/buscar")
