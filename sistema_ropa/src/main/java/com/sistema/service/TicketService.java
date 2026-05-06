@@ -57,12 +57,12 @@ public class TicketService {
         // HEADER EMPRESA
         // ==============================
 
-        Paragraph empresa = new Paragraph("MOBEZA ELECTRICIDAD", titulo);
+        Paragraph empresa = new Paragraph("PERLA", titulo);
         empresa.setAlignment(Element.ALIGN_CENTER);
         document.add(empresa);
 
         Paragraph direccion = new Paragraph(
-                "Acceso Norte S/N - 2681 Etruria, Argentina", smallGray);
+                "BV. Colón 505 - 2550 Bell Ville", smallGray);
         direccion.setAlignment(Element.ALIGN_CENTER);
         document.add(direccion);
 

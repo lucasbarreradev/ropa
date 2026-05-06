@@ -81,7 +81,7 @@ public class PresupuestoPdfService {
 
         // DATOS EMPRESA (gris, debajo del título)
         Paragraph empresa = new Paragraph(
-                "MOBEZA ELECTRICIDAD, Acceso Norte, S/N, 2681 Etruria, Argentina",
+                "PERLA, Bv. Colón 505, 2550 Bell Ville",
                 empresaFont
         );
         empresa.setSpacingAfter(10);
