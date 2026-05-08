@@ -52,11 +52,11 @@
                                         <div class="input-group">
                                                                                                             <input type="text"
                                                                                                                    class="form-control"
-                                                                                                                   value="${producto.proveedor.nombreRazonSocial}"
+                                                                                                                   value="${producto.proveedor != null ? producto.proveedor.nombreRazonSocial : ''}"
                                                                                                                    readonly>
 
-                                                                                                            <input type="hidden" name="proveedor.id"
-                                                                                                                   value="${producto.proveedor.id}">
+                                                                                                            <input type="hidden" name="proveedorId"
+                                                                                                                   value="${producto.proveedor != null ? producto.proveedor.id : ''}">
 
                                                                                                             <a href="${pageContext.request.contextPath}/proveedores?origen=producto&productoId=${producto.id}"
                                                                                                                class="btn btn-primary ml-3">

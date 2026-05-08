@@ -301,10 +301,23 @@ public class ProductoController {
     @PostMapping("/actualizar/{id}")
     public String actualizar(@PathVariable Long id,
                              @ModelAttribute Producto producto,
+                             @RequestParam(required = false) Long proveedorId,
                              RedirectAttributes ra) {
 
+        if (proveedorId != null) {
+
+            Proveedor proveedor = proveedorService
+                    .getProveedorById(proveedorId)
+                    .orElseThrow(() -> new RuntimeException("Proveedor no encontrado"));
+
+            producto.setProveedor(proveedor);
+
+        } else {
+            producto.setProveedor(null);
+        }
 
         productoService.updateProducto(id, producto);
+
         ra.addFlashAttribute("mensaje",
                 "Producto actualizado correctamente");
 
