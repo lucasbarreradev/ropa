@@ -24,7 +24,7 @@ public class PresupuestoPdfService {
 
         try {
             PdfWriter writer = PdfWriter.getInstance(document, out);
-            writer.setPageEvent(new PresupuestoFooter());
+            //writer.setPageEvent(new PresupuestoFooter());
 
             document.open();
 
@@ -47,6 +47,12 @@ public class PresupuestoPdfService {
     private void agregarHeader(Document document, Presupuesto p) throws Exception {
         Font titulo = FontFactory.getFont(FontFactory.HELVETICA, 20, Font.BOLD);
         Font empresaFont = FontFactory.getFont(FontFactory.HELVETICA, 10, Font.NORMAL, BaseColor.GRAY);
+        Font empresaGrande = FontFactory.getFont(
+                FontFactory.HELVETICA,
+                18,
+                Font.BOLD,
+                new BaseColor(218, 198, 125)
+        );
 
         PdfPTable table = new PdfPTable(2);
         table.setWidthPercentage(100);
@@ -60,22 +66,16 @@ public class PresupuestoPdfService {
         table.addCell(tituloCell);
 
         // LOGO (derecha)
-        try {
-            Image logo = Image.getInstance(getClass().getResource("/static/img/LOGO.jpg"));
-            logo.scaleToFit(400, 200);
+        // NOMBRE EMPRESA DERECHA
+        PdfPCell empresaCell = new PdfPCell(
+                new Phrase("PERLA", empresaGrande)
+        );
 
-            PdfPCell logoCell = new PdfPCell(logo);
-            logoCell.setBorder(Rectangle.NO_BORDER);
-            logoCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-            logoCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            logoCell.setPaddingTop(0);
-            table.addCell(logoCell);
-        } catch (Exception e) {
-            // Si no encuentra logo, celda vacía
-            PdfPCell empty = new PdfPCell();
-            empty.setBorder(Rectangle.NO_BORDER);
-            table.addCell(empty);
-        }
+        empresaCell.setBorder(Rectangle.NO_BORDER);
+        empresaCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        empresaCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+        table.addCell(empresaCell);
 
         document.add(table);
 
