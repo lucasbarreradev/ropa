@@ -199,7 +199,7 @@ public class TicketService {
         document.add(politicaTitulo);
 
         com.itextpdf.text.List lista = new com.itextpdf.text.List(false, 10);
-        lista.add(new ListItem("Devoluciones dentro de los 15 dias", small));
+        lista.add(new ListItem("Devoluciones dentro de las próximas 48 horas", small));
         lista.add(new ListItem("Debe conservar este ticket como comprobante", small));
         lista.add(new ListItem("Producto sin uso y con etiqueta original", small));
 

@@ -28,4 +28,7 @@ public interface ProductoTalleRepository extends JpaRepository<ProductoTalle, Lo
             "LOWER(pt.talle.nombre) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
             "pt.codigoBarras LIKE CONCAT('%', :query, '%')")
     List<ProductoTalle> buscar(@Param("query") String query);
+
+    @Query("SELECT COALESCE(SUM(pt.stock), 0) FROM ProductoTalle pt")
+    Integer stockTotalDisponible();
 }

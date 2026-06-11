@@ -460,8 +460,8 @@ document.getElementById("buscarProducto").addEventListener("keyup", function(e) 
         return;
     }
 
-    // Detectar si es código de barras (formato EMP-XXX-XXXX)
-    let esCodigoBarras = /^EMP-\d{3}-\d{4}$/.test(q);
+    // Detectar si es código de barras (formato EMPXXXXXXX)
+    let esCodigoBarras = /^EMP\d{3}\d{4}$/.test(q);
 
     if (esCodigoBarras) {
         // Búsqueda inmediata si es código completo
@@ -722,11 +722,20 @@ function guardarNuevoCliente(event) {
     });
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    const input = document.getElementById("buscarProducto");
+
+    setTimeout(() => {
+        input.focus();
+    }, 200);
+});
+
 // Limpiar errores al cerrar el modal
 document.getElementById('modalNuevoCliente').addEventListener('hidden.bs.modal', function () {
     document.getElementById('formNuevoCliente').reset();
     document.getElementById('errorNuevoCliente').classList.add('d-none');
 });
+
 
 // Inicializar
 renderTabla();

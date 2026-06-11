@@ -320,7 +320,7 @@ public class VentaService {
     }
 
     private String generarCodigoVenta() {
-        return "VENTA-" + System.currentTimeMillis();
+        return "VENTA" + System.currentTimeMillis();
     }
 
     public BigDecimal calcularGananciaTotal(List<Venta> ventas) {

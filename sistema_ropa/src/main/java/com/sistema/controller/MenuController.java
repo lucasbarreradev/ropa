@@ -3,10 +3,7 @@ package com.sistema.controller;
 
 import com.sistema.model.Devolucion;
 import com.sistema.model.Venta;
-import com.sistema.repository.DevolucionRepository;
-import com.sistema.repository.GastoRepository;
-import com.sistema.repository.VentaItemRepository;
-import com.sistema.repository.VentaRepository;
+import com.sistema.repository.*;
 import com.sistema.service.FinanzasService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,19 +21,21 @@ public class MenuController {
     private final FinanzasService finanzasService;
     private final DevolucionRepository devolucionRepository;
     private final GastoRepository gastoRepository;
-
+    private final ProductoTalleRepository productoTalleRepository;
 
     public MenuController(VentaItemRepository ventaItemRepository,
                           VentaRepository ventaRepository,
                           FinanzasService finanzasService,
                           DevolucionRepository devolucionRepository,
-                          GastoRepository gastoRepository
+                          GastoRepository gastoRepository,
+                          ProductoTalleRepository productoTalleRepository
                             ) {
         this.ventaItemRepository = ventaItemRepository;
         this.ventaRepository = ventaRepository;
         this.finanzasService = finanzasService;
         this.devolucionRepository = devolucionRepository;
         this.gastoRepository = gastoRepository;
+        this.productoTalleRepository = productoTalleRepository;
     }
 
     @GetMapping("/")
@@ -135,6 +134,13 @@ public class MenuController {
         // Restar gastos
         gananciaMes = gananciaMes.subtract(gastosMes);
 
+        //Productos disponibles en total
+        Integer stockTotal = productoTalleRepository.stockTotalDisponible();
+
+        if (stockTotal == null) {
+            stockTotal = 0;
+        }
+
         // =========================
         // 🛡️ NULL SAFE + MODEL
         // =========================
@@ -155,6 +161,9 @@ public class MenuController {
         model.addAttribute("gastosDia", gastosDia);
         model.addAttribute("gastosMes", gastosMes);
         model.addAttribute("gastosDia", gastosDia);
+
+        //Stock total
+        model.addAttribute("stockTotal", stockTotal);
         return "index";
     }
 

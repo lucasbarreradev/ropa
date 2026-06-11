@@ -206,9 +206,8 @@
                 <div class="card-body bg-light">
                     <h6 class="fw-bold">📌 Política de devolución</h6>
                     <small class="text-muted">
-                        • Máximo 15 días desde la compra<br>
+                        • Máximo 48 horas desde la compra<br>
                         • Producto sin uso y con etiqueta<br>
-                        • No se aceptan productos en oferta<br>
                         • El cliente debe traer el ticket
                     </small>
                 </div>

@@ -63,8 +63,8 @@
            trasera de la etiqueta de cartón
         ========================================== */
         .etiqueta {
-            width: 40mm;
-            height: 90mm;
+            width: 30mm;
+            height: 70mm;
             border: 1px dashed #aaa; /* Solo guía de corte, no se imprime */
             border-radius: 2px;
             padding: 4mm 3mm 3mm 3mm;

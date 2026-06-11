@@ -56,12 +56,12 @@ public class EtiquetaService {
     // GENERAR CÓDIGO ALEATORIO
     // ==========================================
     private String generarCodigoAleatorio() {
-        // Formato: EMP-XXX-YYYY
+        // Formato: EMPXXXYYYY
         Random random = new Random();
         int numeroAleatorio = random.nextInt(9999);
         int idProducto = random.nextInt(999);
 
-        return String.format("EMP-%03d-%04d", idProducto, numeroAleatorio);
+        return String.format("EMP%03d%04d", idProducto, numeroAleatorio);
     }
 
     // ==========================================
