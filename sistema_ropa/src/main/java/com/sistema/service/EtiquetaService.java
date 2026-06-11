@@ -124,7 +124,13 @@ public class EtiquetaService {
     // BUSCAR POR CÓDIGO DE BARRAS
     // ==========================================
     public ProductoTalle buscarPorCodigoBarras(String codigo) {
-        return productoTalleRepo.findByCodigoBarras(codigo)
+
+        String codigoNormalizado = codigo
+                .replace("-", "")
+                .replace("'", "")
+                .trim();
+
+        return productoTalleRepo.findByCodigoBarras(codigoNormalizado)
                 .orElseThrow(() -> new IllegalArgumentException(
                         "No se encontró producto con código: " + codigo));
     }

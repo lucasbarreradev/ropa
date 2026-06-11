@@ -330,12 +330,28 @@ public class ProductoController {
     @GetMapping("/buscar")
     @ResponseBody
     public List<ProductoTalle> buscar(@RequestParam String q) {
-        // Ahora busca en TalleProducto porque ahí está el stock y precios
+
+        String qNormalizado = q
+                .replace("'", "")
+                .replace("-", "")
+                .trim();
+
         return talleProductoRepo.findAll().stream()
-                .filter(tp -> tp.getProducto().getDescripcion().toLowerCase()
-                        .contains(q.toLowerCase()) ||
-                        (tp.getCodigoBarras() != null &&
-                                tp.getCodigoBarras().contains(q)))
+                .filter(tp -> {
+
+                    String codigo = tp.getCodigoBarras() == null
+                            ? ""
+                            : tp.getCodigoBarras()
+                            .replace("'", "")
+                            .replace("-", "")
+                            .trim();
+
+                    return tp.getProducto().getDescripcion()
+                            .toLowerCase()
+                            .contains(q.toLowerCase())
+                            || codigo.contains(qNormalizado);
+
+                })
                 .toList();
     }
 }

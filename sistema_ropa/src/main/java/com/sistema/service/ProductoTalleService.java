@@ -87,7 +87,11 @@ public class ProductoTalleService {
     }
 
     public Optional<ProductoTalle> findByCodigoBarras(String codigo) {
-        return talleRepo.findByCodigoBarras(codigo);
+        String codigoNormalizado = codigo
+                .replace("-", "")
+                .replace("'", "")
+                .trim();
+        return talleRepo.findByCodigoBarras(codigoNormalizado);
     }
 
     // ==========================================

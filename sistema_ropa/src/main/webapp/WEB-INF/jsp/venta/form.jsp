@@ -461,11 +461,16 @@ document.getElementById("buscarProducto").addEventListener("keyup", function(e) 
     }
 
     // Detectar si es código de barras (formato EMPXXXXXXX)
-    let esCodigoBarras = /^EMP\d{3}\d{4}$/.test(q);
+    let codigoNormalizado = q
+        .replace(/'/g, "")
+        .replace(/-/g, "")
+        .trim();
+
+    let esCodigoBarras = /^EMP\d{7}$/.test(codigoNormalizado);
 
     if (esCodigoBarras) {
         // Búsqueda inmediata si es código completo
-        buscarPorCodigo(q);
+        buscarPorCodigo(codigoNormalizado);
     } else {
         // Búsqueda con delay si es texto
         timeoutBusqueda = setTimeout(() => {
@@ -486,6 +491,9 @@ function buscarProductos(query) {
 }
 
 function buscarPorCodigo(codigo) {
+    codigo = codigo
+            .replace(/'/g, "")
+            .replace(/-/g, "");
     fetch("${pageContext.request.contextPath}/etiquetas/buscar", {
         method: 'POST',
         headers: {
