@@ -334,7 +334,14 @@ function renderTabla() {
                     "<td><strong>" + item.descripcion + "</strong></td>" +
                     "<td class='text-center'>" + item.cantidad + "</td>" +
                     "<td class='text-end'>$" + precio.toFixed(2) + "</td>" +
-                    "<td class='text-center'>" + item.descuento + "%</td>" +
+                    "<td class='text-center'>" +
+                        "<input type='number' " +
+                        "class='form-control form-control-sm text-center' " +
+                        "style='width:80px;margin:auto;' " +
+                        "min='0' max='100' " +
+                        "value='" + item.descuento + "' " +
+                        "onchange='actualizarDescuento(" + index + ", this.value)'>" +
+                    "</td>" +
                     "<td class='text-end fw-semibold'>$" + subtotal.toFixed(2) + "</td>" +
                     "<td class='text-center'>" +
                         "<button type='button' class='btn btn-danger btn-sm' onclick='eliminar(" + index + ")'>✕</button>" +
@@ -397,6 +404,28 @@ function actualizarPreciosFinal() {
     verificarHabilitarBoton();
 }
 
+function actualizarDescuento(index, valor) {
+
+    let descuento = parseFloat(valor);
+
+    if (isNaN(descuento)) {
+        descuento = 0;
+    }
+
+    if (descuento < 0) {
+        descuento = 0;
+    }
+
+    if (descuento > 100) {
+        descuento = 100;
+    }
+
+    items[index].descuento = descuento;
+
+    renderTabla();
+    actualizarPreciosFinal();
+}
+
 // ==========================================
 // VERIFICAR SI SE PUEDE GUARDAR
 // ==========================================
@@ -422,8 +451,15 @@ function verificarHabilitarBoton() {
 function eliminar(index) {
     if (confirm("¿Eliminar este producto?")) {
         items.splice(index, 1);
+
         renderTabla();
         actualizarPreciosFinal();
+
+        setTimeout(() => {
+            const input = document.getElementById("buscarProducto");
+            input.value = "";
+            input.focus();
+        }, 0);
     }
 }
 
@@ -492,8 +528,9 @@ function buscarProductos(query) {
 
 function buscarPorCodigo(codigo) {
     codigo = codigo
-            .replace(/'/g, "")
-            .replace(/-/g, "");
+        .replace(/'/g, "")
+        .replace(/-/g, "");
+
     fetch("${pageContext.request.contextPath}/etiquetas/buscar", {
         method: 'POST',
         headers: {
@@ -504,25 +541,32 @@ function buscarPorCodigo(codigo) {
     })
     .then(res => res.json())
     .then(data => {
+
         if (data.error) {
             alert("❌ " + data.error);
-            document.getElementById("resultados").innerHTML = "";
-        } else {
-            // Producto encontrado por código, seleccionar automáticamente
-            seleccionarProducto(
-                data.id,
-                data.descripcion,
-                data.talle,
-                data.stock,
-                data.precioContado,
-                data.precioTarjeta,
-                data.precioCuentaCorriente
-            );
+            return;
         }
+
+        seleccionarProducto(
+            data.id,
+            data.descripcion,
+            data.talle,
+            data.stock,
+            data.precioContado,
+            data.precioTarjeta,
+            data.precioCuentaCorriente
+        );
+
+        // Agregar automáticamente
+        agregarProducto();
+
+        // Preparar para el siguiente escaneo
+        document.getElementById("buscarProducto").value = "";
+        document.getElementById("buscarProducto").focus();
+
     })
     .catch(err => {
-        console.error('Error buscando por código:', err);
-        alert("❌ Error al buscar el código de barras");
+        console.error(err);
     });
 }
 
@@ -589,7 +633,6 @@ function seleccionarProducto(id, descripcion, talle, stock, pContado, pTarjeta, 
     document.getElementById("buscarProducto").value = productoDescripcion;
     document.getElementById("talle").value = talle || "-";
     document.getElementById("stock").value = Number(stock);
-    document.getElementById("cantidad").value = 1;
     document.getElementById("cantidad").max = stock;
     document.getElementById("precio").value = pContado;
     document.getElementById("textoPrecio").textContent =
