@@ -75,6 +75,7 @@
                                             <th>Stock</th>
                                             <th style="width: 140px;">Cant. Etiquetas</th>
                                             <th>Código</th>
+                                            <th>Proveedor</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -125,6 +126,17 @@
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </td>
+                                                    <td>
+                                                                                                            <c:choose>
+                                                                                                                <c:when test="${not empty p.proveedor}">
+                                                                                                                    <code>${p.proveedor.nombreRazonSocial}</code>
+
+                                                                                                                </c:when>
+                                                                                                                <c:otherwise>
+
+                                                                                                                </c:otherwise>
+                                                                                                            </c:choose>
+                                                                                                        </td>
                                                 </tr>
                                             </c:forEach>
                                         </c:forEach>
