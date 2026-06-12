@@ -131,7 +131,7 @@
                     <!-- CLIENTE -->
                     <div class="mb-3">
                         <label class="form-label fw-semibold">
-                            <small class="badge bg-secondary">Paso 1</small>
+                            <small class="badge bg-secondary text-white">Paso 1</small>
                             Cliente (opcional)
                         </label>
 
@@ -240,7 +240,7 @@ function agregarProducto() {
         alert("⚠️ Seleccioná un producto primero");
         return;
     }
-
+    console.log("AGREGAR", productoTalleSeleccionado);
     let cantidad = parseInt(document.getElementById("cantidad").value);
     let stock = parseInt(document.getElementById("stock").value);
     let descuentoPct = parseFloat(document.getElementById("descuento").value || 0);
@@ -526,10 +526,23 @@ function buscarProductos(query) {
         });
 }
 
+let buscandoCodigo = false;
+let ultimoCodigoProcesado = "";
 function buscarPorCodigo(codigo) {
+
     codigo = codigo
         .replace(/'/g, "")
         .replace(/-/g, "");
+
+    // Evitar procesar el mismo código dos veces seguidas
+    if (buscandoCodigo || codigo === ultimoCodigoProcesado) {
+        return;
+    }
+
+    buscandoCodigo = true;
+    ultimoCodigoProcesado = codigo;
+
+    console.log("BUSCAR CODIGO", codigo);
 
     fetch("${pageContext.request.contextPath}/etiquetas/buscar", {
         method: 'POST',
@@ -557,16 +570,21 @@ function buscarPorCodigo(codigo) {
             data.precioCuentaCorriente
         );
 
-        // Agregar automáticamente
         agregarProducto();
 
-        // Preparar para el siguiente escaneo
         document.getElementById("buscarProducto").value = "";
         document.getElementById("buscarProducto").focus();
-
     })
     .catch(err => {
         console.error(err);
+    })
+    .finally(() => {
+
+        setTimeout(() => {
+            buscandoCodigo = false;
+            ultimoCodigoProcesado = "";
+        }, 500);
+
     });
 }
 
@@ -633,6 +651,7 @@ function seleccionarProducto(id, descripcion, talle, stock, pContado, pTarjeta, 
     document.getElementById("buscarProducto").value = productoDescripcion;
     document.getElementById("talle").value = talle || "-";
     document.getElementById("stock").value = Number(stock);
+    document.getElementById("cantidad").value = "1";
     document.getElementById("cantidad").max = stock;
     document.getElementById("precio").value = pContado;
     document.getElementById("textoPrecio").textContent =
@@ -787,6 +806,12 @@ document.getElementById('modalNuevoCliente').addEventListener('hidden.bs.modal',
     document.getElementById('errorNuevoCliente').classList.add('d-none');
 });
 
+console.log(document.getElementById("buscarProducto"));
+console.log(document.getElementById("resultados"));
+console.log(document.getElementById("buscarCliente"));
+console.log(document.getElementById("resultadosCliente"));
+console.log(document.getElementById("formaPago"));
+console.log(document.getElementById("modalNuevoCliente"));
 
 // Inicializar
 renderTabla();
