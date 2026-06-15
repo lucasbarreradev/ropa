@@ -67,7 +67,7 @@ public class TicketService {
         document.add(direccion);
 
         Paragraph tel = new Paragraph(
-                "Tel: (03562) 123-4567", smallGray);
+                "Tel: (03537) 653171", smallGray);
         tel.setAlignment(Element.ALIGN_CENTER);
         tel.setSpacingAfter(10);
         document.add(tel);

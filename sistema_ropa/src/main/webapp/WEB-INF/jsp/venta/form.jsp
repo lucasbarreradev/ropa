@@ -240,7 +240,6 @@ function agregarProducto() {
         alert("⚠️ Seleccioná un producto primero");
         return;
     }
-    console.log("AGREGAR", productoTalleSeleccionado);
     let cantidad = parseInt(document.getElementById("cantidad").value);
     let stock = parseInt(document.getElementById("stock").value);
     let descuentoPct = parseFloat(document.getElementById("descuento").value || 0);
@@ -542,8 +541,6 @@ function buscarPorCodigo(codigo) {
     buscandoCodigo = true;
     ultimoCodigoProcesado = codigo;
 
-    console.log("BUSCAR CODIGO", codigo);
-
     fetch("${pageContext.request.contextPath}/etiquetas/buscar", {
         method: 'POST',
         headers: {
@@ -794,24 +791,13 @@ function guardarNuevoCliente(event) {
 
 document.addEventListener("DOMContentLoaded", function() {
     const input = document.getElementById("buscarProducto");
+    setTimeout(() => input.focus(), 200);
 
-    setTimeout(() => {
-        input.focus();
-    }, 200);
+    document.getElementById('modalNuevoCliente').addEventListener('hidden.bs.modal', function () {
+        document.getElementById('formNuevoCliente').reset();
+        document.getElementById('errorNuevoCliente').classList.add('d-none');
+    });
 });
-
-// Limpiar errores al cerrar el modal
-document.getElementById('modalNuevoCliente').addEventListener('hidden.bs.modal', function () {
-    document.getElementById('formNuevoCliente').reset();
-    document.getElementById('errorNuevoCliente').classList.add('d-none');
-});
-
-console.log(document.getElementById("buscarProducto"));
-console.log(document.getElementById("resultados"));
-console.log(document.getElementById("buscarCliente"));
-console.log(document.getElementById("resultadosCliente"));
-console.log(document.getElementById("formaPago"));
-console.log(document.getElementById("modalNuevoCliente"));
 
 // Inicializar
 renderTabla();
@@ -887,7 +873,7 @@ renderTabla();
 
                         <!-- DNI -->
                         <div class="col-md-6 mb-3">
-                            <label class="form-label fw-semibold">DNI</label>
+                            <label class="form-label fw-semibold">DNI / CUIT</label>
                             <input type="text"
                                    id="clienteDni"
                                    class="form-control"

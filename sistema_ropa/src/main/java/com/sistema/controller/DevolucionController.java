@@ -45,7 +45,7 @@ public class DevolucionController {
         }
 
         // Formatear fechas
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         Map<Long, String> fechasFormateadas = new HashMap<>();
 
         for (Devolucion d : devoluciones) {
@@ -107,7 +107,7 @@ public class DevolucionController {
         Venta venta = ventaRepo.findById(ventaId)
                 .orElseThrow(() -> new IllegalArgumentException("Venta no encontrada"));
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String fechaVentaFmt = venta.getFechaVenta().format(formatter);
 
         model.addAttribute("venta", venta);

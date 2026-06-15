@@ -6,11 +6,12 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<c:url value='/' />">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fa-solid fa-shirt"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">Sistema Stock</div>
+            <a class="sidebar-brand d-flex justify-content-center"
+               href="<c:url value='/' />">
+
+                <img src="<c:url value='/img/logo_perla.png' />"
+                     alt="Perla"
+                     style="width:120px; height:120px; object-fit:contain;">
             </a>
 
             <!-- Divider -->
@@ -97,5 +98,19 @@
 
 
         </ul>
+
+        <style>
+        .sidebar .sidebar-brand
+            {
+            height: 7rem;
+            padding: 10px 0;
+                }
+        .sidebar .sidebar-brand img
+            {
+                width: 90px;
+                height: 90px;
+                object-fit: contain;
+                    }
+        </style>
 
         <!-- End of Sidebar -->
