@@ -5,7 +5,10 @@ services:
     ports:
       - "8081:8080"
     environment:
-      DB_URL: jdbc:mysql://ropa:3306/ropa?createDatabaseIfNotExist=true&serverTimezone=UTC
+      TZ: America/Argentina/Buenos_Aires
+      JAVA_TOOL_OPTIONS: -Duser.timezone=America/Argentina/Buenos_Aires
+      
+      DB_URL: jdbc:mysql://ropa:3306/ropa?createDatabaseIfNotExist=true
       DB_USER_NAME: app
       DB_PASSWORD: app123
 

@@ -44,13 +44,20 @@
 
                                     <script>
                                     document.getElementById('searchInput').addEventListener('keyup', function () {
+
                                         const filter = this.value.toLowerCase();
                                         const rows = document.querySelectorAll('#dataTable tbody tr');
 
                                         rows.forEach(row => {
-                                            row.style.display = row.textContent.toLowerCase().includes(filter)
-                                                ? ''
-                                                : 'none';
+
+                                            const textoVisible = row.textContent.toLowerCase();
+                                            const productos = (row.dataset.productos || '').toLowerCase();
+
+                                            row.style.display =
+                                                textoVisible.includes(filter) ||
+                                                productos.includes(filter)
+                                                    ? ''
+                                                    : 'none';
                                         });
                                     });
                                     </script>
@@ -72,7 +79,12 @@
                             <tbody>
 
                             <c:forEach items="${ventas}" var="v">
-                                <tr>
+                                <tr data-productos="
+                                    <c:forEach items='${v.items}' var='item'>
+                                        ${item.productoTalle.producto.descripcion}
+                                        ${item.productoTalle.talle.nombre}
+                                    </c:forEach>
+                                ">
                                     <td>${v.id}</td>
                                     <td>${v.codigo}</td>
                                     <td>
@@ -117,22 +129,31 @@
     </div>
 </div>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+document.getElementById('searchInput').addEventListener('keyup', function () {
 
-    const params = new URLSearchParams(window.location.search);
-    const ticketId = params.get('ticketId');
+    const palabras = this.value
+        .toLowerCase()
+        .trim()
+        .split(/\s+/);
 
-    if (ticketId) {
+    const rows = document.querySelectorAll('#dataTable tbody tr');
 
-        const url = '${pageContext.request.contextPath}/ventas/ticket/' + ticketId;
+    rows.forEach(row => {
 
-        const win = window.open(url, '_blank');
+        const texto = (
+            row.textContent + ' ' + (row.dataset.productos || '')
+        )
+        .toLowerCase()
+        .replace(/[^a-z0-9áéíóúüñ]/gi, ' ');
 
-        if (!win) {
-            window.location.href = url;
-        }
-    }
+        const palabrasTexto = texto.split(/\s+/);
 
+        const coincide = palabras.every(p =>
+            palabrasTexto.includes(p)
+        );
+
+        row.style.display = coincide ? '' : 'none';
+    });
 });
 </script>
 
