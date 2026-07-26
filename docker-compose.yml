@@ -8,9 +8,9 @@ services:
       TZ: America/Argentina/Buenos_Aires
       JAVA_TOOL_OPTIONS: -Duser.timezone=America/Argentina/Buenos_Aires
       
-      DB_URL: jdbc:mysql://ropa:3306/ropa?createDatabaseIfNotExist=true
-      DB_USER_NAME: app
-      DB_PASSWORD: app123
+      DB_URL: ${DB_URL}
+      DB_USER_NAME: ${DB_USER_NAME}
+      DB_PASSWORD: ${DB_PASSWORD}
 
       APP_ADMIN_USER: admin
       APP_ADMIN_PASS: ${ADMIN_PASS}
@@ -27,10 +27,10 @@ services:
     ports:
       - "3308:3306"
     environment:
-      MYSQL_USER: app
-      MYSQL_ROOT_PASSWORD: root123
-      MYSQL_PASSWORD: app123
-      MYSQL_DATABASE: ropa
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
     volumes:
       - ropa_mysql_data:/var/lib/mysql  
     restart: always
