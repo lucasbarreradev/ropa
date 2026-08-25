@@ -42,7 +42,7 @@
                                 <button type="button"
                                         class="btn btn-sm btn-outline-primary me-2 mr-2"
                                         onclick="seleccionarTodos()">
-                                    ✓ Seleccionar todos
+                                    ✓ Seleccionar visibles
                                 </button>
 
                                 <button type="button"
@@ -197,7 +197,9 @@ function calcularTotal() {
 }
 
 function seleccionarTodos() {
-    const checks = document.querySelectorAll('.talle-check');
+    const checks = Array.from(document.querySelectorAll('.talle-check'))
+        .filter(check => check.closest('tr').style.display !== 'none');
+
     checks.forEach(c => {
         c.checked = true;
         toggleCantidad(c.value);
